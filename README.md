@@ -23,8 +23,28 @@ download the data from
 
 https://drive.google.com/drive/folders/1xw0XX-WK74uxtFFLySbtnX-ODdmdK5Ec
 
+'''bash
 git init
+'''
 
+'''bash
 dvc init
+'''
 
+'''bash
 dvc add data_given/winequality.csv
+'''
+
+'''bash
+git add .
+'''
+
+'''bash
+git commit -m "first commit"
+'''
+
+'''bash
+git remote add origin https://github.com/shdubey1/simple-dvc-demo.git
+git branch -M main
+git push origin main
+'''
