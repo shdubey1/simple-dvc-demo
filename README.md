@@ -1,50 +1,54 @@
 create env
 
-'''bash
+```bash
 
 conda create -n wineq python=3.7 -y
-'''
+```
 
 activate env
 
-'''bash
+```bash
 
 conda activate wineq
-'''
+```
 
 create a requirement file
 
 install the req
-'''bash
+```bash
 pip install -r requirements.txt
-'''
+```
 
 download the data from
 
 https://drive.google.com/drive/folders/1xw0XX-WK74uxtFFLySbtnX-ODdmdK5Ec
 
-'''bash
+```bash
 git init
-'''
+```
 
-'''bash
+```bash
 dvc init
-'''
+```
 
-'''bash
+```bash
 dvc add data_given/winequality.csv
-'''
+```
 
-'''bash
+one line commit
+```
+git add . && git commit -m "update README.md"
+```
+```bash
 git add .
-'''
+```
 
-'''bash
+```bash
 git commit -m "first commit"
-'''
+```
 
-'''bash
+```bash
 git remote add origin https://github.com/shdubey1/simple-dvc-demo.git
 git branch -M main
 git push origin main
-'''
+```
