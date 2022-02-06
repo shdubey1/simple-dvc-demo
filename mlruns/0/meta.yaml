@@ -1,0 +1,4 @@
+artifact_location: file:///Users/shubham/Documents/G_drive/MLOps/simple_app/mlruns/0
+experiment_id: '0'
+lifecycle_stage: active
+name: Default
