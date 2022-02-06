@@ -33,7 +33,7 @@ mlflow_config:
   artifacts_dir: artifacts
   experiment_name: ElasticNet regression
   run_name: mlops
-  regisered_model_name: ElasticNetWineModel
+  registered_model_name: ElasticNetWineModel
   remote_server_uri: http://0.0.0.0:1234
 
 

@@ -2,6 +2,7 @@
 # train algo
 # save the metrices, params
 import os
+import sched
 import warnings
 import sys
 import pandas as pd
@@ -9,6 +10,7 @@ import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
+from urllib.parse import urlparse
 from get_data import read_params
 import argparse
 import joblib
@@ -45,7 +47,7 @@ def train_and_evaluate(config_path):
 
 ###############MLFLOW############################
 
-    mlflow config = config["mlflow config"]
+    mlflow_config = config["mlflow_config"]
     remote_server_uri = mlflow_config["remote_server_uri"]
 
     mlflow.set_tracking_uri("remote_server_uri")
@@ -64,13 +66,23 @@ def train_and_evaluate(config_path):
         
         (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
 
+        mlflow.log_param("alpha", alpha)
+        mlflow.log_param("l1_ratio", l1_ratio)
+        mlflow.log_metric("rmse", rmse)
+        mlflow.log_metric("mae", mae)
+        mlflow.log_metric("r2", r2)
+   
+        tracking_url_type_store = urlparse(mlflow.get_artifact_uri()).scheme
 
-    #####################################################
-
-        os.makedirs(model_dir, exist_ok=True)
-        model_path = os.path.join(model_dir, "model.joblib")
-
-        joblib.dump(lr, model_path)
+        if tracking_url_type_store != "file":
+            mlflow.sklearn.log_model(
+                lr,
+                "model",
+                registered_model_name=mlflow_config["registered_model_name"]
+            
+            )
+        else:
+            mlflow.sklearn.log_model(lr, "model")
 
 
 
